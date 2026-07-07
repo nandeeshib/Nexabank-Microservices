@@ -8,7 +8,7 @@
 
 <br/><br/>
 
-# 🏦 NexaBank — Cloud Banking Microservices
+#  NexaBank — Cloud Banking Microservices
 
 ### **Cloud Computing Lab · Experiment 5**
 ### Microservice Architecture for Banking Management System
@@ -28,19 +28,17 @@
 
 ---
 
-## 👥 Team Members
+##  Team Members
 
-| Name | USN | Roll No | Department |
-|------|-----|---------|------------|
-| **Sudeep S S** | 01FE23BCI101 | 242 | CSE — Artificial Intelligence |
-| **Nandeesh I B** | 01FE23BCI092 | 238 | CSE — Artificial Intelligence |
-| **N T Basavaraj** | 01FE23BCI113 | 247 | CSE — Artificial Intelligence |
+| **Sudeep S S** | 
+| **Nandeesh I B** | 
+| **N T Basavaraj** | 
 
-> 📍 **KLE Technological University** · Department of Computer Science & Engineering (AI)
+>  **KLE Technological University** · Department of Computer Science & Engineering (AI)
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Overview](#-overview)
 - [System Architecture](#-system-architecture)
@@ -58,7 +56,7 @@
 
 ---
 
-## 🌐 Overview
+##  Overview
 
 **NexaBank** is a full-stack cloud-native banking management system built entirely using **Microservice Architecture** and **Docker containerization**. Each banking function (authentication, account management, transactions, balance) runs as a completely independent service with its own database, deployed in isolated Docker containers and orchestrated with Docker Compose.
 
@@ -76,39 +74,39 @@
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                        DOCKER NETWORK (banking-net)              │
 │                                                                  │
-│   ┌─────────────────┐                                           │
-│   │  React Frontend  │  ← localhost:3000                        │
-│   │   (Nginx:80)     │                                           │
-│   └────────┬────────┘                                           │
+│   ┌─────────────────┐                                            │
+│   │  React Frontend │  ← localhost:3000                          │
+│   │   (Nginx:80)    │                                            │
+│   └────────┬────────┘                                            │
 │            │ HTTP                                                │
-│   ┌────────▼────────┐                                           │
-│   │   API GATEWAY   │  ← localhost:8080  (Single Entry Point)  │
-│   │  Node.js:8080   │                                           │
-│   └──┬──┬──┬──┬────┘                                           │
-│      │  │  │  │                                                  │
-│   ┌──▼┐ │ ┌▼──┐ ┌▼──────────┐ ┌▼──────────┐                  │
-│   │AUTH│ │ │ACC│ │TRANSACTION│ │  BALANCE  │                   │
-│   │8001│ │ │8002│ │   8003    │ │   8004    │                   │
-│   └─┬──┘ │ └─┬─┘ └─────┬────┘ └───────────┘                  │
-│     │    │   │          │  (calls Account Service internally)   │
-│  ┌──▼──┐ │ ┌─▼──┐  ┌───▼────┐                                 │
-│  │Mongo│ │ │Mongo│  │ Mongo  │                                  │
-│  │27017│ │ │27018│  │ 27019  │                                  │
-│  │auth │ │ │acct │  │ txn    │                                  │
-│  └─────┘ │ └─────┘  └────────┘                                 │
-│          └──────────────────────────────────────────────────────│
+│   ┌────────▼────────┐                                            │
+│   │   API GATEWAY   │  ← localhost:8080  (Single Entry Point)    │
+│   │  Node.js:8080   │                                            │
+│   └──┬───┬────┬─────┘                                            │
+│      │   │    │         │             |                          │
+│   ┌──▼─┐ │ ┌──▼─┐ ┌─────▼─────┐ ┌─────▼─────┐                    │
+│   │AUTH│ │ │ACC │ │TRANSACTION│ │  BALANCE  │                    │
+│   │8001│ │ │8002│ │   8003    │ │   8004    │                    │
+│   └─┬──┘ │ └─┬──┘ └─────┬─────┘ └───────────┘                    │
+│     │    │   │          │                                        │
+│  ┌──▼──┐ │ ┌─▼──┐   ┌───▼────┐                                   │
+│  │Mongo│ │ │Mongo│  │ Mongo  │                                   │
+│  │27017│ │ │27018│  │ 27019  │                                   │
+│  │auth │ │ │acct │  │ txn    │                                   │
+│  └─────┘ │ └─────┘  └────────┘                                   │
+│          └──────────────────── (calls Account Service internally)│
 └──────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🔀 Microservice Communication Flow
+##  Microservice Communication Flow
 
 > How the API Gateway routes every client request to the correct microservice
 
@@ -134,7 +132,7 @@ Client → Gateway → Transaction Service
 
 ---
 
-## 🗄️ MongoDB Database Schema Design
+##  MongoDB Database Schema Design
 
 > Three completely independent databases — Database-Per-Service Pattern
 
@@ -150,7 +148,7 @@ Client → Gateway → Transaction Service
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Backend Microservices
 | Technology | Version | Usage |
@@ -180,7 +178,7 @@ Client → Gateway → Transaction Service
 
 ---
 
-## 🔌 Services & Ports
+##  Services & Ports
 
 | Service | Container | Host Port | Internal Port | Description |
 |---------|-----------|-----------|---------------|-------------|
@@ -196,41 +194,41 @@ Client → Gateway → Transaction Service
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🔐 Authentication
+### Authentication
 - User registration with bcrypt password hashing
 - JWT-based stateless login (24-hour token expiry)
 - Role-based access (Customer / Admin)
 - Protected routes with middleware token verification
 
-### 🏦 Account Management
+### Account Management
 - Open new bank accounts (Savings / Current / Fixed Deposit)
 - Auto-generated unique account numbers (`ACC` + timestamp + sequence)
 - Account status management (Active / Inactive / Frozen)
 - IFSC code, branch name, holder details
 
-### 💰 Transaction Operations
+### Transaction Operations
 - **Credit / Deposit** — Add money with category tagging (salary, deposit)
 - **Debit / Withdrawal** — Withdraw with insufficient balance protection
 - **Fund Transfer** — Transfer between accounts using account number
 - Transaction ID auto-generation (`TXN` + timestamp)
 - Balance before/after tracking on every transaction
 
-### 📊 Balance & Statement
+### Balance & Statement
 - Real-time balance enquiry
 - Complete transaction history with pagination
 - Credit/debit totals summary
 - Full audit trail with timestamps
 
-### 🖥️ Dashboard
+### Dashboard
 - Portfolio overview — total balance across all accounts
 - Account cards with live balance
 - Role & profile information
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -243,19 +241,15 @@ Git               → https://git-scm.com/downloads
 ### Installation & Running
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/nexabank-microservices.git
-cd nexabank-microservices
-
-# 2. Build and start ALL services (one command!)
+# 1. Build and start ALL services (one command!)
 docker compose up --build
 
-# 3. Open in browser
+# 2. Open in browser
 # → Frontend UI:   http://localhost:3000
 # → API Gateway:   http://localhost:8080/health
 ```
 
-> ⏱️ First build takes 5–10 minutes (downloads Node.js, MongoDB, Nginx images)
+>  First build takes 5–10 minutes (downloads Node.js, MongoDB, Nginx images)
 
 ### Stopping the Application
 
@@ -269,11 +263,11 @@ docker compose down -v
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 All endpoints are accessible through the **API Gateway** at `http://localhost:8080`
 
-### 🔐 Auth Service `/api/auth`
+###  Auth Service `/api/auth`
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -302,7 +296,7 @@ POST /api/auth/register
 }
 ```
 
-### 🏦 Account Service `/api/accounts`
+### Account Service `/api/accounts`
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -328,7 +322,7 @@ Authorization: Bearer <token>
 }
 ```
 
-### 💳 Transaction Service `/api/transactions`
+###  Transaction Service `/api/transactions`
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -362,7 +356,7 @@ Authorization: Bearer <token>
 }
 ```
 
-### 📊 Balance Service `/api/balance`
+### Balance Service `/api/balance`
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -390,7 +384,7 @@ curl http://localhost:8004/api/balance/health      # Balance
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 ### Dashboard — Financial Overview
 ![Dashboard](screenshots/dashboard.png)
@@ -414,7 +408,7 @@ curl http://localhost:8004/api/balance/health      # Balance
 
 ---
 
-## 🐳 Docker Containers
+##  Docker Containers
 
 ### All 9 Containers Running — `docker ps`
 ![Docker PS](screenshots/docker-ps.png)
@@ -434,7 +428,7 @@ curl http://localhost:8004/api/balance/health      # Balance
 
 ---
 
-## 📐 Microservice Principles Demonstrated
+##  Microservice Principles Demonstrated
 
 | Principle | Implementation in NexaBank |
 |-----------|---------------------------|
@@ -449,39 +443,39 @@ curl http://localhost:8004/api/balance/health      # Balance
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 nexabank-microservices/
 │
-├── 📄 docker-compose.yml          ← Orchestrates all 9 containers
+├──  docker-compose.yml          ← Orchestrates all 9 containers
 │
-├── 📁 api-gateway/                ← Routes /api/* to correct service
+├──  api-gateway/                ← Routes /api/* to correct service
 │   ├── Dockerfile
 │   ├── package.json
 │   └── server.js
 │
-├── 📁 auth-service/               ← Register, Login, JWT
+├──  auth-service/               ← Register, Login, JWT
 │   ├── Dockerfile
 │   ├── package.json
 │   └── server.js
 │
-├── 📁 account-service/            ← Create accounts, CRUD, balance update
+├──  account-service/            ← Create accounts, CRUD, balance update
 │   ├── Dockerfile
 │   ├── package.json
 │   └── server.js
 │
-├── 📁 transaction-service/        ← Credit, Debit, Fund Transfer
+├──  transaction-service/        ← Credit, Debit, Fund Transfer
 │   ├── Dockerfile
 │   ├── package.json
 │   └── server.js
 │
-├── 📁 balance-service/            ← Balance aggregation, statements
+├──  balance-service/            ← Balance aggregation, statements
 │   ├── Dockerfile
 │   ├── package.json
 │   └── server.js
 │
-├── 📁 frontend/                   ← React.js Banking UI
+├──  frontend/                   ← React.js Banking UI
 │   ├── Dockerfile                 ← Multi-stage: Node build + Nginx serve
 │   ├── nginx.conf
 │   ├── package.json
@@ -491,7 +485,7 @@ nexabank-microservices/
 │       ├── index.js
 │       └── App.js                 ← Full dashboard, transactions, balance
 │
-└── 📁 screenshots/                ← All demo screenshots & diagrams
+└──  screenshots/                ← All demo screenshots & diagrams
     ├── api-gateway-flow.png
     ├── mongodb-schema.png
     ├── dashboard.png
@@ -507,7 +501,7 @@ nexabank-microservices/
 
 ---
 
-## 🔧 Useful Docker Commands
+##  Useful Docker Commands
 
 ```bash
 # Start all services
@@ -553,7 +547,7 @@ docker compose down -v
 
 ---
 
-## 🔒 Security Features
+##  Security Features
 
 - **Password Hashing** — bcrypt with 10 salt rounds (industry standard)
 - **JWT Tokens** — Signed with secret key, expires in 24 hours
@@ -565,7 +559,7 @@ docker compose down -v
 
 ---
 
-## 📚 Learning Outcomes
+##  Learning Outcomes
 
 From this experiment we learned:
 
@@ -580,7 +574,7 @@ From this experiment we learned:
 
 ---
 
-## 📖 References
+##  References
 
 - [Docker Official Documentation](https://docs.docker.com/)
 - [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices)
@@ -593,7 +587,7 @@ From this experiment we learned:
 
 <div align="center">
 
-**Built with ❤️ for Cloud Computing Lab — KLE Technological University**
+**Built for Cloud Computing Lab — KLE Technological University**
 
 ![Made with Docker](https://img.shields.io/badge/Made%20with-Docker-2496ED?style=flat-square&logo=docker)
 ![Made with Node.js](https://img.shields.io/badge/Made%20with-Node.js-339933?style=flat-square&logo=node.js)
