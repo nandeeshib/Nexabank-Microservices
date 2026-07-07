@@ -10,7 +10,7 @@
 
 #  NexaBank — Cloud Banking Microservices
 
-### **Cloud Computing Lab · Experiment 5**
+### **Cloud Computing Lab · Experiment **
 ### Microservice Architecture for Banking Management System
 
 *A fully containerized, production-grade banking system built with Node.js microservices, MongoDB, React.js, and Docker — demonstrating real-world cloud-native application design.*
