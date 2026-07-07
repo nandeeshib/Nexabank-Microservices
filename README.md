@@ -280,8 +280,8 @@ All endpoints are accessible through the **API Gateway** at `http://localhost:80
 ```json
 POST /api/auth/register
 {
-  "name": "Raj Kumar",
-  "email": "raj@bank.com",
+  "name": "Nandeesh IB",
+  "email": "test123@gmail.com",
   "password": "securepass123",
   "role": "customer"
 }
@@ -292,7 +292,7 @@ POST /api/auth/register
 {
   "message": "Login successful",
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "user": { "id": "...", "name": "Raj Kumar", "email": "raj@bank.com", "role": "customer" }
+  "user": { "id": "...", "name": "Nandeesh IB", "email": "test123@gmail.com", "role": "customer" }
 }
 ```
 
@@ -313,11 +313,11 @@ POST /api/auth/register
 POST /api/accounts
 Authorization: Bearer <token>
 {
-  "holderName": "Raj Kumar",
-  "email": "raj@bank.com",
+  "holderName": "Nandeesh IB",
+  "email": "test123@gmail.com",
   "phone": "9876543210",
   "accountType": "savings",
-  "address": "Chennai, Tamil Nadu",
+  "address": "Hubballi, Karnataka ",
   "initialDeposit": 5000
 }
 ```
