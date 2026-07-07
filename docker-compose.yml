@@ -1,0 +1,101 @@
+services:
+  mongo-auth:
+    image: mongo:6
+    container_name: mongo-auth
+    ports: ["27017:27017"]
+    volumes: [auth-data:/data/db]
+    networks: [banking-net]
+
+  mongo-account:
+    image: mongo:6
+    container_name: mongo-account
+    ports: ["27018:27017"]
+    volumes: [account-data:/data/db]
+    networks: [banking-net]
+
+  mongo-transaction:
+    image: mongo:6
+    container_name: mongo-transaction
+    ports: ["27019:27017"]
+    volumes: [transaction-data:/data/db]
+    networks: [banking-net]
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports: ["8001:8001"]
+    environment:
+      - PORT=8001
+      - MONGO_URI=mongodb://mongo-auth:27017/authdb
+      - JWT_SECRET=banking_secret_2024
+    depends_on: [mongo-auth]
+    networks: [banking-net]
+    restart: unless-stopped
+
+  account-service:
+    build: ./account-service
+    container_name: account-service
+    ports: ["8002:8002"]
+    environment:
+      - PORT=8002
+      - MONGO_URI=mongodb://mongo-account:27017/accountdb
+      - JWT_SECRET=banking_secret_2024
+    depends_on: [mongo-account]
+    networks: [banking-net]
+    restart: unless-stopped
+
+  transaction-service:
+    build: ./transaction-service
+    container_name: transaction-service
+    ports: ["8003:8003"]
+    environment:
+      - PORT=8003
+      - MONGO_URI=mongodb://mongo-transaction:27017/transactiondb
+      - JWT_SECRET=banking_secret_2024
+      - ACCOUNT_SERVICE_URL=http://account-service:8002
+    depends_on: [mongo-transaction, account-service]
+    networks: [banking-net]
+    restart: unless-stopped
+
+  balance-service:
+    build: ./balance-service
+    container_name: balance-service
+    ports: ["8004:8004"]
+    environment:
+      - PORT=8004
+      - JWT_SECRET=banking_secret_2024
+      - ACCOUNT_SERVICE_URL=http://account-service:8002
+      - TRANSACTION_SERVICE_URL=http://transaction-service:8003
+    depends_on: [account-service, transaction-service]
+    networks: [banking-net]
+    restart: unless-stopped
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports: ["8080:8080"]
+    environment:
+      - PORT=8080
+      - AUTH_SERVICE=http://auth-service:8001
+      - ACCOUNT_SERVICE=http://account-service:8002
+      - TRANSACTION_SERVICE=http://transaction-service:8003
+      - BALANCE_SERVICE=http://balance-service:8004
+    depends_on: [auth-service, account-service, transaction-service, balance-service]
+    networks: [banking-net]
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports: ["3000:80"]
+    depends_on: [api-gateway]
+    networks: [banking-net]
+
+volumes:
+  auth-data:
+  account-data:
+  transaction-data:
+
+networks:
+  banking-net:
+    driver: bridge
