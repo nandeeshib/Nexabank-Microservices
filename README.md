@@ -1,13 +1,5 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/Cloud%20Computing-Experiment%205-00875A?style=for-the-badge&logo=cloud&logoColor=white"/>
-<img src="https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
-<img src="https://img.shields.io/badge/Microservices-Architecture-FF6B35?style=for-the-badge&logo=node.js&logoColor=white"/>
-<img src="https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/>
-<img src="https://img.shields.io/badge/React.js-Frontend-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
-
-<br/><br/>
-
 #  NexaBank — Cloud Banking Microservices
 
 ### **Cloud Computing Lab · Experiment **
@@ -17,6 +9,7 @@
 
 <br/>
 
+<img src="https://img.shields.io/badge/Cloud%20Computing-Experiment%205-00875A?style=for-the-badge&logo=cloud&logoColor=white"/>
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![Node.js](https://img.shields.io/badge/Node.js-18_Alpine-339933?logo=node.js)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)
@@ -30,9 +23,7 @@
 
 ##  Team Members
 
-| **Sudeep S S** | 
-| **Nandeesh I B** | 
-| **N T Basavaraj** | 
+| **Sudeep S S** | **Nandeesh I B** | **N T Basavaraj** | 
 
 >  **KLE Technological University** · Department of Computer Science & Engineering (AI)
 
